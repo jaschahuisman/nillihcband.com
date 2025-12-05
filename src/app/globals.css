@@ -1,26 +1,128 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+    font-family: "StackSansHeadline";
+    src: url("/fonts/StackSansHeadline-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@font-face {
+    font-family: "StackSansHeadline";
+    src: url("/fonts/StackSansHeadline-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--foreground);
+}
+
+@theme {
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --color-primary: var(--primary);
+    --color-primary-foreground: #fff;
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --font-sans: var(--font-stack-sans-headline);
+}
+
+/* variables */
+
+:root {
+    --background: #ffd2c3;
+    --foreground: #480000;
+    --primary: #ad3636;
+    --primary-foreground: #fff;
+    --secondary: #ffbdb6;
+    --secondary-foreground: #000;
+    --accent: #000;
+    --accent-foreground: #fff;
+    --destructive: #9d3636;
+    --destructive-foreground: #fff;
+    --border: #000;
+    --input: #000;
+    --ring: #000;
+    --muted: #f6c6b6;
+    --muted-foreground: #b88278;
+    --font-stack-sans-headline: "StackSansHeadline", Noto Sans, system-ui, sans-serif;
+}
+
+a {
+    @apply hover:text-primary transition;
+}
+
+.shaky {
+    animation: shaky 0.5s infinite linear;
+    display: inline-block;
+}
+
+.animate-spin-slow {
+    animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes shaky {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-1px, 1px) rotate(-1deg);
+    }
+
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(-1deg);
+    }
+}
+
+button {
+    @apply hover:cursor-pointer;
 }
