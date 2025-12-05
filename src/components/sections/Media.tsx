@@ -21,7 +21,7 @@ type Item =
 const mediaItems: MediaItem[] = [
     { src: "/images/synth.jpg", id: "synth" },
     { src: "/images/thijmen.jpg", id: "thijmen" },
-    { src: "/images/kring.jpg", id: "kring" },
+    { src: "/images/jisk-geert.jpg", id: "kring" },
     { src: "/images/contact.jpg", id: "contact" },
     { src: "/images/bridge.jpg", id: "bridge" },
     { src: "/images/big-rivers.jpg", id: "big-rivers" },
