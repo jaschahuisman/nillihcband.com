@@ -52,7 +52,7 @@ export const streamingPlatforms: Platform[] = [
   {
     name: "Tidal",
     icon: SiTidal,
-    href: "https://tidal.com/artist/nillihc?ref=nillihc",
+    href: "https://tidal.com/artist/9736733?ref=nillihc",
     ariaLabel: "Luister Nillihc op Tidal",
   },
   {

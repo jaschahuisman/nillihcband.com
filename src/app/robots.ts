@@ -53,21 +53,20 @@ export default function robots(): MetadataRoute.Robots {
                 allow: "/",
             },
             {
-                // Block AI training crawlers (optional - remove if you want AI indexing)
                 userAgent: "GPTBot",
-                disallow: "/",
+                allow: "/",
             },
             {
                 userAgent: "ChatGPT-User",
-                disallow: "/",
+                allow: "/",
             },
             {
                 userAgent: "CCBot",
-                disallow: "/",
+                allow: "/",
             },
             {
                 userAgent: "anthropic-ai",
-                disallow: "/",
+                allow: "/",
             },
         ],
         sitemap: `${BASE_URL}/sitemap.xml`,

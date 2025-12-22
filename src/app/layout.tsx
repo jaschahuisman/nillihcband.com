@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     locale: "nl_NL",
     url: "https://nillihcband.com",
     siteName: "Nillihc",
-    title: "Nillihc | Rotterdamse Jazz Funk Band",
+    title: "Nillihc | Post-jazz uit Rotterdam",
     description:
       "Zevenkoppige instrumentale band uit Rotterdam. Post-jazz, funk en fusion met dikke baslijnen en dansbare grooves. Winnaar Grote Prijs van Dordt 2025.",
     images: [
@@ -50,13 +50,13 @@ export const metadata: Metadata = {
         url: "/presskit/presspic-landscape.webp",
         width: 1200,
         height: 630,
-        alt: "Nillihc - Rotterdamse jazz funk band",
+        alt: "Nillihc - Post-jazz uit Rotterdam",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nillihc | Rotterdamse Jazz Funk Band",
+    title: "Nillihc | Post-jazz uit Rotterdam",
     description:
       "Zevenkoppige instrumentale band uit Rotterdam. Post-jazz, funk en fusion met dikke baslijnen en dansbare grooves.",
     images: ["/presskit/presspic-landscape.webp"],

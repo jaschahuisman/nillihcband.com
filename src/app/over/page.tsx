@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     creator: "Nillihc",
     publisher: "Nillihc",
     openGraph: {
-        title: "Over Nillihc | Rotterdamse Jazz Funk Band",
+        title: "Over Nillihc | Post-jazz uit Rotterdam",
         description: "Zevenkoppige instrumentale band uit Rotterdam. Post-jazz, funk en fusion met dikke baslijnen, jazzy blazers en dansbare grooves. Winnaar Grote Prijs van Dordt 2025.",
         url: "https://nillihcband.com/over",
         siteName: "Nillihc",
@@ -44,13 +44,13 @@ export const metadata: Metadata = {
                 url: "/presskit/presspic-landscape.webp",
                 width: 1200,
                 height: 630,
-                alt: "Nillihc - Rotterdamse jazz funk band",
+                alt: "Nillihc - Post-jazz uit Rotterdam",
             },
         ],
     },
     twitter: {
         card: "summary_large_image",
-        title: "Over Nillihc | Rotterdamse Jazz Funk Band",
+        title: "Over Nillihc | Post-jazz uit Rotterdam",
         description: "Zevenkoppige instrumentale band uit Rotterdam. Post-jazz, funk en fusion met dikke baslijnen en dansbare grooves.",
         images: ["/presskit/presspic-landscape.webp"],
     },
@@ -236,7 +236,7 @@ export default function OverPage() {
                         <article itemScope itemType="https://schema.org/Article">
                             <header>
                                 <h2 className="sr-only" itemProp="headline">
-                                    Nillihc - Rotterdamse Jazz Funk Band
+                                    Nillihc - Post-jazz uit Rotterdam
                                 </h2>
                             </header>
 
@@ -245,7 +245,7 @@ export default function OverPage() {
                                 <div className="lg:sticky lg:top-8">
                                     <Image
                                         src="/presskit/presspic-landscape.webp"
-                                        alt="Nillihc band - zevenkoppige jazz funk formatie uit Rotterdam op het podium"
+                                        alt="Nillihc band - zevenkoppige post-jazz formatie uit Rotterdam op het podium"
                                         width={800}
                                         height={533}
                                         className="w-full h-auto rounded-2xl"

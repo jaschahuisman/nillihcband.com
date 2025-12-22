@@ -16,6 +16,11 @@ const nextConfig: NextConfig = {
         destination: '/epk',
         permanent: true,
       },
+      {
+        source: '/pers',
+        destination: '/epk',
+        permanent: true,
+      },
     ];
   },
 };
