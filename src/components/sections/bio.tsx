@@ -2,7 +2,7 @@ import { Container } from "@/components/layout/container";
 import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { ArrowRightIcon } from "lucide-react";
+import { ArrowRightIcon, ImageIcon } from "lucide-react";
 
 function Bio() {
     return (
@@ -18,12 +18,12 @@ function Bio() {
                 <div className="flex gap-2 flex-wrap justify-end">
                     <Button asChild variant={"outline"}>
                         <Link href={"/over"}>
-                            Lees meer over Nillihc
+                            Lees meer over Nillihc <ArrowRightIcon />
                         </Link>
                     </Button>
                     <Button asChild variant={"outline"}>
                         <Link href={"/epk"}>
-                            Bekijk onze EPK <ArrowRightIcon />
+                            Bekijk onze EPK <ImageIcon />
                         </Link>
                     </Button>
                 </div>

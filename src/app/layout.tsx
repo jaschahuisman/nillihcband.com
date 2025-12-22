@@ -9,13 +9,13 @@ const stackSansHeadline = Stack_Sans_Headline({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://nillihc.nl"),
+  metadataBase: new URL("https://nillihcband.com"),
   title: {
-    default: "Nillihc | Rotterdamse Jazz Funk Band",
+    default: "Nillihc | Post-jazz uit Rotterdam",
     template: "%s | Nillihc",
   },
   description:
-    "Nillihc is een zevenkoppige instrumentale band uit Rotterdam. Post-jazz, funk en fusion met dikke baslijnen, jazzy blazers en dansbare grooves. Boek ons voor je evenement!",
+    "Nillihc is een zevenkoppige instrumentale band uit Rotterdam. Post-jazz, funk en fusion met dikke baslijnen, jazzy blazers en dansbare grooves.",
   keywords: [
     "Nillihc",
     "Nillihc band",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "nl_NL",
-    url: "https://nillihc.nl",
+    url: "https://nillihcband.com",
     siteName: "Nillihc",
     title: "Nillihc | Rotterdamse Jazz Funk Band",
     description:
@@ -78,7 +78,7 @@ export const metadata: Metadata = {
     // google: "je-verificatie-code",
   },
   alternates: {
-    canonical: "https://nillihc.nl",
+    canonical: "https://nillihcband.com",
   },
   category: "music",
 };
@@ -89,21 +89,21 @@ const siteStructuredData = {
   "@graph": [
     {
       "@type": "WebSite",
-      "@id": "https://nillihc.nl/#website",
-      url: "https://nillihc.nl",
+      "@id": "https://nillihcband.com/#website",
+      url: "https://nillihcband.com",
       name: "Nillihc",
-      description: "Officiële website van Nillihc - Rotterdamse jazz funk band",
-      publisher: { "@id": "https://nillihc.nl/#musicgroup" },
+      description: "Officiële website van Nillihc - Post-jazz uit Rotterdam",
+      publisher: { "@id": "https://nillihcband.com/#musicgroup" },
       inLanguage: "nl-NL",
     },
     {
       "@type": "MusicGroup",
-      "@id": "https://nillihc.nl/#musicgroup",
+      "@id": "https://nillihcband.com/#musicgroup",
       name: "Nillihc",
       alternateName: ["Nillihc Band", "Nillihc Rotterdam"],
-      url: "https://nillihc.nl",
-      logo: "https://nillihc.nl/logo.svg",
-      image: "https://nillihc.nl/presskit/presspic-landscape.webp",
+      url: "https://nillihcband.com",
+      logo: "https://nillihcband.com/logo.svg",
+      image: "https://nillihcband.com/presskit/presspic-landscape.webp",
       description:
         "Nillihc is een zevenkoppige instrumentale jazzformatie uit Rotterdam die jazz een frisse, groovy twist geeft door een unieke mix van jazz, funk en fusion.",
       foundingDate: "2017-02",

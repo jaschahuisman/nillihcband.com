@@ -3,7 +3,7 @@ import { Container } from "@/components/layout/container";
 import { BackToHome } from "@/components/layout/back-to-home";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { ArrowRightIcon, MailIcon, MusicIcon, TrophyIcon, CalendarIcon, UsersIcon, DiscIcon, MapPinIcon } from "lucide-react";
+import { ArrowRightIcon, MailIcon, MapPinIcon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Over Nillihc | Rotterdamse Jazz Funk Band",
         description: "Zevenkoppige instrumentale band uit Rotterdam. Post-jazz, funk en fusion met dikke baslijnen, jazzy blazers en dansbare grooves. Winnaar Grote Prijs van Dordt 2025.",
-        url: "https://nillihc.nl/over",
+        url: "https://nillihcband.com/over",
         siteName: "Nillihc",
         locale: "nl_NL",
         type: "website",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
         images: ["/presskit/presspic-landscape.webp"],
     },
     alternates: {
-        canonical: "https://nillihc.nl/over",
+        canonical: "https://nillihcband.com/over",
     },
     robots: {
         index: true,
@@ -160,11 +160,11 @@ const structuredData = {
         "https://soundcloud.com/nillihc-band",
         "https://nillihc.bandcamp.com",
     ],
-    url: "https://nillihc.nl",
+    url: "https://nillihcband.com",
     email: "info@nillihcband.com",
     telephone: "+31620672161",
-    image: "https://nillihc.nl/presskit/presspic-landscape.webp",
-    logo: "https://nillihc.nl/logo.svg",
+    image: "https://nillihcband.com/presskit/presspic-landscape.webp",
+    logo: "https://nillihcband.com/logo.svg",
 };
 
 // Bandleden data

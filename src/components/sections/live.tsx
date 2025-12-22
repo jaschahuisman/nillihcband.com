@@ -70,7 +70,7 @@ function Live() {
                     <div className="flex flex-col gap-2 mb-8">
                         <h2 className="text-4xl font-bold">Nillihc Live</h2>
                         <p className="text-lg font-normal">
-                            Bekijk onze live optredens en performances.
+                            Check Nillihc's live optredens en performances.
                         </p>
                     </div>
 
