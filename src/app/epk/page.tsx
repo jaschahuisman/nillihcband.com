@@ -10,6 +10,7 @@ import { ArrowRightIcon, ChevronDownIcon, DownloadIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { socials, streamingPlatforms } from "@/lib/constants";
 
 export default function EpkPage() {
     return (
@@ -42,6 +43,24 @@ export default function EpkPage() {
             </PageHeader >
 
             <PageContent>
+                <Container id="socials">
+                    <h2 className="text-base font-bold mb-4">Socials</h2>
+                    <div className="flex flex-wrap gap-x-6 gap-y-2">
+                        {socials.map((social) => (
+                            <a
+                                key={social.name}
+                                href={social.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-muted-foreground hover:text-foreground transition-colors underline underline-offset-4"
+                                aria-label={social.ariaLabel}
+                            >
+                                {social.name}
+                            </a>
+                        ))}
+                    </div>
+                </Container>
+
                 <Container id="photos">
                     <h2 className="text-base font-bold mb-4">Nillihc in beeld</h2>
 
@@ -154,24 +173,34 @@ export default function EpkPage() {
 
                 <Container id="listen">
                     <h2 className="text-base font-bold mb-4">Luister Nillihc</h2>
-                    <div className="mb-4">
+                    <div className="mb-8">
                         <SpotifyEmbed
                             url="https://open.spotify.com/embed/artist/3LAoxEz5BGdijXj4YG2f6v?utm_source=generator"
                             title="Nillihc Spotify Artist"
                             height={352}
                         />
                     </div>
+                    <div className="flex justify-center">
+                        <div className="flex items-center gap-4">
+                            {streamingPlatforms.map((platform) => (
+                                <a
+                                    key={platform.name}
+                                    href={platform.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={platform.ariaLabel}
+                                    className="text-foreground/80 hover:text-foreground transition-colors duration-200 hover:scale-110"
+                                >
+                                    <platform.icon className="size-5 md:size-8" />
+                                </a>
+                            ))}
+                        </div>
+                    </div>
                 </Container>
 
                 <Container id="biography">
                     <Collapsible className="group">
-                        <div className="flex justify-between items-center">
-                            <h2 className="text-xl font-bold mb-4">Biografie</h2>
-                            <CollapsibleTrigger asChild><Button variant={"outline"}>
-                                <span className="group-data-[state=open]:hidden">Lees meer</span>
-                                <ChevronDownIcon className="size-4 group-data-[state=open]:rotate-180 transition-transform duration-300" />
-                            </Button></CollapsibleTrigger>
-                        </div>
+                        <h2 className="text-xl font-bold mb-4">Biografie</h2>
                         <section className="mb-4">
                             <h3 className="text-base font-bold mb-2">Oorsprong</h3>
                             <p className="text-muted-foreground max-w-prose">
@@ -198,6 +227,13 @@ export default function EpkPage() {
                                 </p>
                             </section>
                         </CollapsibleContent>
+                        <CollapsibleTrigger asChild>
+                            <Button variant={"outline"} className="mt-4">
+                                <span className="group-data-[state=open]:hidden">Lees meer</span>
+                                <span className="hidden group-data-[state=open]:inline">Lees minder</span>
+                                <ChevronDownIcon className="size-4 group-data-[state=open]:rotate-180 transition-transform duration-300" />
+                            </Button>
+                        </CollapsibleTrigger>
                     </Collapsible>
                 </Container>
             </PageContent>
