@@ -1,16 +1,20 @@
 services:
   db:
-    image: postgres:latest
+    image: postgres:16
     restart: always
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: nillihc
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d nillihc"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
 volumes:
   postgres_data:
-
-
-# DATABASE_URL=postgres://user:password@db:5432/nillihc

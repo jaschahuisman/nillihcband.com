@@ -6,10 +6,9 @@ import { BackToHome } from "@/components/layout/back-to-home";
 import { YoutubeVideoEmbed } from "@/components/video-embed";
 import { SpotifyEmbed } from "@/components/spotify-embed";
 import { Button } from "@/components/ui/button";
-import { ArrowRightIcon, ChevronDownIcon, DownloadIcon } from "lucide-react";
+import { ArrowRightIcon, DownloadIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { socials, streamingPlatforms } from "@/lib/constants";
 
 export default function EpkPage() {
@@ -159,7 +158,7 @@ export default function EpkPage() {
 
                     <div className="flex justify-end">
                         <Button variant={"outline"} asChild>
-                            <Link href="/epk#biography">
+                            <Link href="/over#biography">
                                 Meer over Nillihc
                             </Link>
                         </Button>
@@ -196,45 +195,6 @@ export default function EpkPage() {
                             ))}
                         </div>
                     </div>
-                </Container>
-
-                <Container id="biography">
-                    <Collapsible className="group">
-                        <h2 className="text-xl font-bold mb-4">Biografie</h2>
-                        <section className="mb-4">
-                            <h3 className="text-base font-bold mb-2">Oorsprong</h3>
-                            <p className="text-muted-foreground max-w-prose">
-                                Wat in 2017 begon als een onschuldig middelbare schoolproject, is inmiddels uitgegroeid tot een niet te negeren kracht in de Zuid-Hollandse muziekscene. Nillihc is het bewijs dat sommige schoolbandjes niet uit elkaar vallen, maar juist samensmelten tot iets groters. Gedreven door een gedeelde obsessie voor alles wat funky, jazzy en bovenal dansbaar is, verruilde de band het klaslokaal al snel voor de podia van Rotterdam en ver daarbuiten.
-                            </p>
-                        </section>
-                        <CollapsibleContent>
-                            <section className="mb-4">
-                                <h3 className="text-base font-bold mb-2">Creatieve drift</h3>
-                                <p className="text-muted-foreground max-w-prose">
-                                    De potentie was er direct: in hun oprichtingsjaar sleepte de formatie meteen de Rabobank Cultuurprijs (2017) binnen. Het was het startschot voor een periode van creatieve drift, waarin de band hun sound vastlegde op de EP Gainz (2018), gevolgd door de single Fanfare Joepie. De productiviteit bleef hoog, want niet veel later volgde in 2019 de tweede EP Do You Mind.
-                                </p>
-                            </section>
-                            <section className="mb-4">
-                                <h3 className="text-base font-bold mb-2">Optredens</h3>
-                                <p className="text-muted-foreground max-w-prose">
-                                    De live-reputatie van de band werd in de jaren daarna steen voor steen opgebouwd. Zo verzorgde Nillihc in 2020 al het voorprogramma van Willem 't Hart. Dat de groep muzikaal messcherp is, werd een jaar later officieel erkend toen ze de titel De Puls Strakheids Belofte van Nissewaard (2021) op hun naam schreven. De band bleef zich ontwikkelen en claimde hun plek in de scene, wat in 2023 onder meer resulteerde in een residentie in het Rotterdamse jazzwalhalla Dizzy.
-                                </p>
-                            </section>
-                            <section className="mb-4">
-                                <h3 className="text-base font-bold mb-2">Stroomversnelling</h3>
-                                <p className="text-muted-foreground max-w-prose">
-                                    De afgelopen jaren is de band in een stroomversnelling geraakt. Met de releases van de singles Get It High (2023) en het toepasselijke Energiehuis (2024) werd de opmaat gegeven voor een ware triomftocht. De zomer van 2025 voelde als één lang hoogtepunt, waarbij de band alle festivals in de regio plat speelde: van het Spijkenisse Festival en Voorstraat Noord tot aan het jaarlijkse Popcentrale festival. Als kers op de taart – en als ultieme bevestiging van hun groei – won Nillihc in 2025 De Grote Prijs van Dordt, na al jaren een graag geziene gast te zijn geweest op festivals als Big Rivers.
-                                </p>
-                            </section>
-                        </CollapsibleContent>
-                        <CollapsibleTrigger asChild>
-                            <Button variant={"outline"} className="mt-4">
-                                <span className="group-data-[state=open]:hidden">Lees meer</span>
-                                <span className="hidden group-data-[state=open]:inline">Lees minder</span>
-                                <ChevronDownIcon className="size-4 group-data-[state=open]:rotate-180 transition-transform duration-300" />
-                            </Button>
-                        </CollapsibleTrigger>
-                    </Collapsible>
                 </Container>
             </PageContent>
         </Page >

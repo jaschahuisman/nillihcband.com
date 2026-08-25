@@ -290,45 +290,38 @@ export default function OverPage() {
                         <Separator className="bg-muted-foreground/30" />
                     </Container>
 
-                    {/* Oorsprong & Geschiedenis */}
-                    <Container id="geschiedenis">
-                        <section aria-labelledby="geschiedenis-heading">
-                            <div className="flex items-center gap-3 mb-6">
-                                <h2 id="geschiedenis-heading" className="text-2xl font-bold">
-                                    Van klaslokaal naar podium
-                                </h2>
-                            </div>
+                    {/* Biografie */}
+                    <Container id="biography">
+                        <section aria-labelledby="biography-heading">
+                            <h2 id="biography-heading" className="text-2xl font-bold mb-6">
+                                Biografie
+                            </h2>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
-                                <div className="space-y-4">
-                                    <h3 className="text-lg font-bold">Oorsprong</h3>
+                            <div className="space-y-6 max-w-prose">
+                                <section>
+                                    <h3 className="text-lg font-bold mb-2">Oorsprong</h3>
                                     <p className="text-muted-foreground">
-                                        Wat in februari 2017 begon als een onschuldig
-                                        middelbare schoolproject, is inmiddels uitgegroeid tot een niet te
-                                        negeren kracht in de Zuid-Hollandse muziekscene. Nillihc is het
-                                        bewijs dat sommige schoolbandjes niet uit elkaar vallen, maar juist
-                                        samensmelten tot iets groters.
+                                        Wat in 2017 begon als een onschuldig middelbare schoolproject, is inmiddels uitgegroeid tot een niet te negeren kracht in de Zuid-Hollandse muziekscene. Nillihc is het bewijs dat sommige schoolbandjes niet uit elkaar vallen, maar juist samensmelten tot iets groters. Gedreven door een gedeelde obsessie voor alles wat funky, jazzy en bovenal dansbaar is, verruilde de band het klaslokaal al snel voor de podia van Rotterdam en ver daarbuiten.
                                     </p>
+                                </section>
+                                <section>
+                                    <h3 className="text-lg font-bold mb-2">Creatieve drift</h3>
                                     <p className="text-muted-foreground">
-                                        De potentie was er direct: in hun oprichtingsjaar sleepte de formatie
-                                        meteen de Rabobank Cultuurprijs binnen. Het was het
-                                        startschot voor een periode van creatieve drift.
+                                        De potentie was er direct: in hun oprichtingsjaar sleepte de formatie meteen de Rabobank Cultuurprijs (2017) binnen. Het was het startschot voor een periode van creatieve drift, waarin de band hun sound vastlegde op de EP Gainz (2018), gevolgd door de single Fanfare Joepie. De productiviteit bleef hoog, want niet veel later volgde in 2019 de tweede EP Do You Mind.
                                     </p>
-                                </div>
-
-                                <div className="space-y-4">
-                                    <h3 className="text-lg font-bold">Creatieve groei</h3>
+                                </section>
+                                <section>
+                                    <h3 className="text-lg font-bold mb-2">Optredens</h3>
                                     <p className="text-muted-foreground">
-                                        Gedreven door een gedeelde obsessie voor alles wat funky, jazzy en
-                                        bovenal dansbaar is, verruilde de band het klaslokaal al snel voor de
-                                        podia van Rotterdam en ver daarbuiten.
+                                        De live-reputatie van de band werd in de jaren daarna steen voor steen opgebouwd. Zo verzorgde Nillihc in 2020 al het voorprogramma van Willem &apos;t Hart. Dat de groep muzikaal messcherp is, werd een jaar later officieel erkend toen ze de titel De Puls Strakheids Belofte van Nissewaard (2021) op hun naam schreven. De band bleef zich ontwikkelen en claimde hun plek in de scene, wat in 2023 onder meer resulteerde in een residentie in het Rotterdamse jazzwalhalla Dizzy.
                                     </p>
+                                </section>
+                                <section>
+                                    <h3 className="text-lg font-bold mb-2">Stroomversnelling</h3>
                                     <p className="text-muted-foreground">
-                                        De live-reputatie werd steen voor steen opgebouwd. In 2023 claimde
-                                        Nillihc hun plek in de scene met een residentie in het Rotterdamse
-                                        jazzwalhalla Dizzy.
+                                        De afgelopen jaren is de band in een stroomversnelling geraakt. Met de releases van de singles Get It High (2023) en het toepasselijke Energiehuis (2024) werd de opmaat gegeven voor een ware triomftocht. De zomer van 2025 voelde als één lang hoogtepunt, waarbij de band alle festivals in de regio plat speelde: van het Spijkenisse Festival en Voorstraat Noord tot aan het jaarlijkse Popcentrale festival. Als kers op de taart – en als ultieme bevestiging van hun groei – won Nillihc in 2025 De Grote Prijs van Dordt, na al jaren een graag geziene gast te zijn geweest op festivals als Big Rivers.
                                     </p>
-                                </div>
+                                </section>
                             </div>
                         </section>
                     </Container>

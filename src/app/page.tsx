@@ -9,8 +9,8 @@ export default function Home() {
     <Page>
       <Hero />
       <PageContent>
-        <Listen />
         <Live />
+        <Listen />
         <Bio />
       </PageContent>
     </Page>

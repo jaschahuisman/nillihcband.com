@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Stack_Sans_Headline } from "next/font/google";
+import { headers } from "next/headers";
 import "./globals.css";
 import { Footer } from "@/components/layout/footer";
 
@@ -133,22 +134,31 @@ const siteStructuredData = {
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headersList = await headers();
+  const isCrmRoute = headersList.get("x-crm-route") === "1";
+
   return (
-    <html lang="nl">
+    <html
+      lang="nl"
+      className={isCrmRoute ? "dark" : undefined}
+      style={isCrmRoute ? { colorScheme: "dark" } : undefined}
+    >
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(siteStructuredData) }}
         />
       </head>
-      <body className={`${stackSansHeadline.variable} font-sans antialiased`}>
+      <body
+        className={`${stackSansHeadline.variable} font-sans antialiased${isCrmRoute ? " bg-background text-foreground" : ""}`}
+      >
         {children}
-        <Footer />
+        {isCrmRoute ? null : <Footer />}
       </body>
     </html>
   );
