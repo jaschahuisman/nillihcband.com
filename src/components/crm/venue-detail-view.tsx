@@ -16,6 +16,7 @@ import {
 import { toast } from "sonner";
 import { ContactMultiSelect } from "@/components/crm/contact-multi-select";
 import { DeleteAlert } from "@/components/crm/delete-alert";
+import { OutreachPanel } from "@/components/crm/outreach/outreach-panel";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -47,6 +48,8 @@ import type {
   VenueNoteEntry,
   VenueWithContacts,
 } from "@/lib/crm/queries";
+import type { AppliedFinding } from "@/lib/outreach/findings";
+import type { VenueOutreach } from "@/lib/outreach/queries";
 import { cn } from "@/lib/utils";
 
 const SAVE_DEBOUNCE_MS = 600;
@@ -144,9 +147,11 @@ function UrlField({
 export function VenueDetailView({
   venue,
   contactOptions,
+  outreach,
 }: {
   venue: VenueWithContacts | null;
   contactOptions: ContactOption[];
+  outreach?: VenueOutreach;
 }) {
   const router = useRouter();
   const [venueId, setVenueId] = useState<string | null>(venue?.id ?? null);
@@ -159,6 +164,8 @@ export function VenueDetailView({
   const [notePending, setNotePending] = useState(false);
   const [favorite, setFavorite] = useState(() => venue?.favorite ?? false);
   const [archived, setArchived] = useState(() => venue?.archived ?? false);
+  /** Contacts created from research findings, before the server props catch up. */
+  const [extraContacts, setExtraContacts] = useState<ContactOption[]>([]);
 
   const saveGeneration = useRef(0);
   const favoriteRef = useRef(favorite);
@@ -279,6 +286,44 @@ export function VenueDetailView({
     router.refresh();
   }
 
+  /**
+   * Findings are written to the database server-side. Mirroring them into the
+   * local draft keeps the form in sync and stops the next autosave from writing
+   * the stale values back.
+   */
+  function handleFindingsApplied(applied: AppliedFinding[]) {
+    const patch: Partial<VenueDraft> = {};
+    const newContactIds: string[] = [];
+
+    for (const item of applied) {
+      if (item.kind === "venue_field") {
+        if (item.field === "scale") {
+          patch.scale = item.value as VenueDraft["scale"];
+        } else {
+          patch[item.field] = item.value;
+        }
+        continue;
+      }
+
+      if (item.kind === "contact") {
+        newContactIds.push(item.contact.id);
+        setExtraContacts((current) =>
+          current.some((contact) => contact.id === item.contact.id)
+            ? current
+            : [...current, item.contact],
+        );
+      }
+    }
+
+    if (newContactIds.length === 0 && Object.keys(patch).length === 0) return;
+
+    setDraft((current) => ({
+      ...current,
+      ...patch,
+      contactIds: [...new Set([...current.contactIds, ...newContactIds])],
+    }));
+  }
+
   async function handleAddNote() {
     if (!venueId) {
       toast.error("Vul eerst een naam in zodat de venue wordt opgeslagen.");
@@ -315,6 +360,15 @@ export function VenueDetailView({
   const homeHref = externalHref(draft.homeUrl);
   const programmaHref = externalHref(draft.programmaUrl);
   const contactHref = externalHref(draft.contactUrl);
+  const allContactOptions = [
+    ...contactOptions,
+    ...extraContacts.filter(
+      (extra) => !contactOptions.some((option) => option.id === extra.id),
+    ),
+  ];
+  const linkedContacts = allContactOptions.filter((contact) =>
+    draft.contactIds.includes(contact.id),
+  );
 
   return (
     <>
@@ -493,7 +547,7 @@ export function VenueDetailView({
             <section className={fieldClass}>
               <Label className={labelClass}>Contacten</Label>
               <ContactMultiSelect
-                options={contactOptions}
+                options={allContactOptions}
                 value={draft.contactIds}
                 onChange={(contactIds) => patchDraft({ contactIds })}
                 defaultOrganization={draft.name}
@@ -501,6 +555,17 @@ export function VenueDetailView({
                 defaultType="venue"
               />
             </section>
+
+            {venueId && outreach ? (
+              <OutreachPanel
+                venueId={venueId}
+                venueName={draft.name || venue?.name || "Venue"}
+                venueEmail={draft.email.trim() || null}
+                contacts={linkedContacts}
+                outreach={outreach}
+                onFindingsApplied={handleFindingsApplied}
+              />
+            ) : null}
 
             <section className="space-y-2">
               <Label className={labelClass}>Notities</Label>

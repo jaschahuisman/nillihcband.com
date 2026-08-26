@@ -2,6 +2,7 @@ import { notFound, redirect } from "next/navigation";
 import { VenueDetailView } from "@/components/crm/venue-detail-view";
 import { getSessionUser } from "@/lib/auth";
 import { getContactOptions, getVenue } from "@/lib/crm/queries";
+import { getVenueOutreach } from "@/lib/outreach/queries";
 
 export default async function VenueDetailPage({
   params,
@@ -12,12 +13,19 @@ export default async function VenueDetailPage({
   if (!user) redirect("/crm/login");
 
   const { id } = await params;
-  const [venue, contactOptions] = await Promise.all([
+  const [venue, contactOptions, outreach] = await Promise.all([
     getVenue(id),
     getContactOptions(),
+    getVenueOutreach(id),
   ]);
 
   if (!venue) notFound();
 
-  return <VenueDetailView venue={venue} contactOptions={contactOptions} />;
+  return (
+    <VenueDetailView
+      venue={venue}
+      contactOptions={contactOptions}
+      outreach={outreach}
+    />
+  );
 }

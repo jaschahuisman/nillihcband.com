@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import {
   Archive,
   ArchiveRestore,
+  ChevronDown,
   ExternalLink,
   MoreHorizontal,
   Star,
@@ -13,14 +14,24 @@ import {
 import { toast } from "sonner";
 import { ContactBadges } from "@/components/crm/contact-badges";
 import { DeleteAlert } from "@/components/crm/delete-alert";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { CrmToolbar } from "@/components/crm/crm-toolbar";
 import {
   emptyVenueFilters,
   parseSmartVenueSearch,
   type VenueFilters,
 } from "@/components/crm/venue-filters";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -36,9 +47,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import type { VenueStatus } from "@/db/schema";
 import {
   deleteVenue,
   setVenueArchived,
+  setVenueStatus,
   toggleVenueFavorite,
 } from "@/lib/crm/actions";
 import {
@@ -86,6 +99,10 @@ export function VenuesView({ venues }: { venues: VenueWithContacts[] }) {
   const [filters] = useState<VenueFilters>(emptyVenueFilters);
   const [showArchive, setShowArchive] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [rejectionPrompt, setRejectionPrompt] = useState<{
+    venueId: string;
+    reason: string;
+  } | null>(null);
 
   const archivedCount = useMemo(
     () => venues.filter((venue) => venue.archived).length,
@@ -179,6 +196,42 @@ export function VenuesView({ venues }: { venues: VenueWithContacts[] }) {
     toast.success("Venue verwijderd");
     setDeleteId(null);
     router.refresh();
+  }
+
+  async function applyVenueStatus(
+    venueId: string,
+    status: VenueStatus,
+    rejectionReason?: string | null,
+  ) {
+    const result = await setVenueStatus(venueId, status, rejectionReason);
+    if (!result.ok) {
+      toast.error(result.error);
+      return;
+    }
+    toast.success("Status bijgewerkt");
+    router.refresh();
+  }
+
+  function handleStatusChange(venue: VenueWithContacts, status: VenueStatus) {
+    if (status === venue.status) return;
+
+    if (status === "rejected" && !venue.rejectionReason?.trim()) {
+      setRejectionPrompt({ venueId: venue.id, reason: "" });
+      return;
+    }
+
+    void applyVenueStatus(venue.id, status);
+  }
+
+  async function confirmRejection() {
+    if (!rejectionPrompt) return;
+    const reason = rejectionPrompt.reason.trim();
+    if (!reason) {
+      toast.error("Reden van afwijzing is verplicht.");
+      return;
+    }
+    await applyVenueStatus(rejectionPrompt.venueId, "rejected", reason);
+    setRejectionPrompt(null);
   }
 
   return (
@@ -301,9 +354,41 @@ export function VenuesView({ venues }: { venues: VenueWithContacts[] }) {
                     </div>
                   </TableCell>
                   <TableCell className="px-3 py-1.5">
-                    <Badge variant="outline" className="font-normal">
-                      {venueStatusLabels[venue.status]}
-                    </Badge>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger
+                        asChild
+                        onClick={(event) => event.stopPropagation()}
+                      >
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          className="h-6 gap-1 px-2 text-xs font-normal"
+                        >
+                          {venueStatusLabels[venue.status]}
+                          <ChevronDown className="size-3 opacity-60" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="start" className="dark w-52">
+                        {Object.entries(venueStatusLabels).map(
+                          ([value, label]) => (
+                            <DropdownMenuItem
+                              key={value}
+                              disabled={venue.status === value}
+                              onClick={(event) => {
+                                event.stopPropagation();
+                                handleStatusChange(
+                                  venue,
+                                  value as VenueStatus,
+                                );
+                              }}
+                            >
+                              {label}
+                            </DropdownMenuItem>
+                          ),
+                        )}
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </TableCell>
                   <TableCell className="hidden px-3 py-1.5 text-muted-foreground md:table-cell">
                     {venue.scale ? venueScaleLabels[venue.scale] : "—"}
@@ -388,6 +473,39 @@ export function VenuesView({ venues }: { venues: VenueWithContacts[] }) {
         description="Dit kan niet ongedaan worden gemaakt."
         onConfirm={handleDelete}
       />
+
+      <AlertDialog
+        open={rejectionPrompt !== null}
+        onOpenChange={(open) => !open && setRejectionPrompt(null)}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Reden van afwijzing</AlertDialogTitle>
+            <AlertDialogDescription>
+              Geef een korte reden op voordat je deze venue als afgewezen
+              markeert.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <Textarea
+            value={rejectionPrompt?.reason ?? ""}
+            onChange={(event) =>
+              setRejectionPrompt((current) =>
+                current
+                  ? { ...current, reason: event.target.value }
+                  : current,
+              )
+            }
+            placeholder="Bijv. past niet bij ons genre"
+            className="min-h-20 text-sm"
+          />
+          <AlertDialogFooter>
+            <AlertDialogCancel>Annuleren</AlertDialogCancel>
+            <AlertDialogAction onClick={() => void confirmRejection()}>
+              Opslaan
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   );
 }

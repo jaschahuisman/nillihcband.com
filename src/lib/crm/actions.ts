@@ -302,6 +302,51 @@ export async function setVenueArchived(
   }
 }
 
+export async function setVenueStatus(
+  venueId: string,
+  status: (typeof venueStatusEnum.enumValues)[number],
+  rejectionReason?: string | null,
+): Promise<ActionResult> {
+  await requireSessionUser();
+
+  if (!venueStatusEnum.enumValues.includes(status)) {
+    return { ok: false, error: "Ongeldige status." };
+  }
+
+  try {
+    const [venue] = await db
+      .select({ rejectionReason: venues.rejectionReason })
+      .from(venues)
+      .where(eq(venues.id, venueId))
+      .limit(1);
+
+    if (!venue) {
+      return { ok: false, error: "Venue niet gevonden." };
+    }
+
+    const reason =
+      rejectionReason?.trim() || venue.rejectionReason?.trim() || null;
+
+    if (status === "rejected" && !reason) {
+      return { ok: false, error: "Reden van afwijzing is verplicht." };
+    }
+
+    await db
+      .update(venues)
+      .set({
+        status,
+        rejectionReason: status === "rejected" ? reason : null,
+      })
+      .where(eq(venues.id, venueId));
+
+    revalidateCrm();
+    revalidatePath(`/crm/venues/${venueId}`);
+    return { ok: true };
+  } catch {
+    return { ok: false, error: "Status kon niet worden bijgewerkt." };
+  }
+}
+
 export async function deleteVenue(venueId: string): Promise<ActionResult> {
   await requireSessionUser();
 
